@@ -28,6 +28,7 @@
                 </div>
             </div>
         </div>
+        <a href="/berita/read">Read Berita</a>
         @if (auth()->user()->level === 'admin')
             <button>Role</button>
         @else

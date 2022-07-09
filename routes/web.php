@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\authController;
+use App\Http\Controllers\beritaController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,6 +16,12 @@ use App\Http\Controllers\authController;
 
 route::group(['middleware' => ['auth']], function () {
     Route::get('/', [authController::class, 'welcome']);
+    Route::get('/berita/add', [beritaController::class, 'beritaAdd']);
+    Route::get('/berita/read', [beritaController::class, 'beritaRead']);
+    Route::get('/berita/delete/{id}', [beritaController::class, 'beritaDelete']);
+    Route::get('/berita/edit/{id}', [beritaController::class, 'beritaEdit']);
+    Route::post('/berita/edit/{id}', [beritaController::class, 'beritaEditPost']);
+    Route::post('/berita/add', [beritaController::class, 'beritaPost']);
 });
 
 

@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
+
 class authController extends Controller
 {
     public function login()
@@ -13,8 +14,8 @@ class authController extends Controller
     }
     public function welcome()
     {
-        $user=user::all();
-        return view('welcome',compact('user'));
+        $user = user::all();
+        return view('welcome', compact('user'));
     }
     public function logout(Request $request)
     {
@@ -32,9 +33,9 @@ class authController extends Controller
         if (Auth::attempt($validasi)) {
             $request->session()->regenerate();
             if (auth()->user()->level == 'user') {
-                return redirect()->intended('/welcome');
+                return redirect()->intended('/');
             } else {
-                return redirect()->intended('/welcome');
+                return redirect()->intended('/');
             }
         } else {
             return back()->with('gagal', 'login anda gagal!');
@@ -45,15 +46,15 @@ class authController extends Controller
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required|email:dns|unique:users',
-            'password' => 'required'
+            'password' => 'required',
         ]);
 
         $user = new User;
-        $user -> name = $request -> name;
-        $user -> email = $request -> email;
-        $user -> password = bcrypt($request -> password);
-        $user->level="user";
-        $user -> save($validatedData);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->password = bcrypt($request->password);
+        $user->level = "user";
+        $user->save($validatedData);
         return redirect('/login');
     }
     public function register()

@@ -14,7 +14,7 @@ use App\Http\Controllers\authController;
 */
 
 route::group(['middleware' => ['auth']], function () {
-    Route::get('/welcome', [authController::class, 'welcome']);
+    Route::get('/', [authController::class, 'welcome']);
 });
 
 
@@ -25,5 +25,5 @@ Route::post('/register', [authController::class, 'registerPost']);
 route::group(['middleware' => ['guest']], function () {
     Route::get('/login', [authController::class, 'login'])->name('login');
     Route::get('/register', [authController::class, 'register'])->name('register');
-    
+
 });

@@ -9,12 +9,12 @@
 <body>
 
   <main>
-      
+
 <header>
     <!-- navigasi -->
-    
-    
-    
+
+
+
   </header>
 
 <div class="tengah">
@@ -23,7 +23,7 @@
 
             <main class="form-signin">
                 <form action="/register" method="post">
-                  @csrf     
+                  @csrf
                   <h1 class="h3 mb-3 fw-normal text-center">Register</h1>
                   <div class="form-floating">
                       <label for="name">username</label>
@@ -49,7 +49,7 @@
                   </div>
                   <button class="w-100 btn btn-lg btn-primary" type="submit">Daftar</button>
                 </form>
-                {{-- <small class="d-block text-center mt-3">Not registered? 
+                {{-- <small class="d-block text-center mt-3">Not registered?
                     <a href="/register">Register Now!</a>
                 </small> --}}
               </main>

@@ -41,7 +41,11 @@
                             <td>{{$brt->caption}}</td>
                             <td><a href="{{asset('/file_berita/'.$brt->file)}}"><button>berita</button></a></td>
                             <td>{{$brt->status}}</td>
-                            <td><a href="/berita/edit/{{$brt->id}}">edit</a> | <a href="/berita/delete/{{$brt->id}}" onclick="return confirm('Yakin ingin hapus ? ')">delete</a></td>
+                            <td><a href="/berita/edit/{{$brt->id}}">edit</a> | <a href="/berita/delete/{{$brt->id}}" onclick="return confirm('Yakin ingin hapus ? ')">delete</a> |
+                                @if (auth()->user()->level === 'admin')
+                                    <a href="/confirm/admin/{{$brt->id}}">confirm</a>
+                                @endif
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

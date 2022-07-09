@@ -62,4 +62,16 @@ class beritaController extends Controller
         $berita->update();
         return redirect('/berita/read');
     }
+    public function confirmAdmin($id)
+    {
+        $berita=berita::findOrFail($id);
+        return view('confirm/c_admin',compact('berita'));
+    }
+    public function confirmAdminPost(Request $request, $id)
+    {
+        $berita=berita::findOrFail($id);
+        $berita->status=$request->confirm;
+        $berita->update();
+        return redirect('/berita/read');
+    }
 }

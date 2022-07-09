@@ -20,6 +20,8 @@ route::group(['middleware' => ['auth']], function () {
     Route::get('/berita/read', [beritaController::class, 'beritaRead']);
     Route::get('/berita/delete/{id}', [beritaController::class, 'beritaDelete']);
     Route::get('/berita/edit/{id}', [beritaController::class, 'beritaEdit']);
+    Route::get('/confirm/admin/{id}', [beritaController::class, 'confirmAdmin']);
+    Route::post('/confirm/admin/{id}', [beritaController::class, 'confirmAdminPost']);
     Route::post('/berita/edit/{id}', [beritaController::class, 'beritaEditPost']);
     Route::post('/berita/add', [beritaController::class, 'beritaPost']);
 });

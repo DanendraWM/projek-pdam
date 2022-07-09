@@ -23,6 +23,7 @@ class beritaController extends Controller
         $berita->judul=$request->judul;
         $berita->caption=$request->caption;
         $berita->file=$filename;
+        $berita->status="draf";
         $berita->save();
         return redirect('/');
     }

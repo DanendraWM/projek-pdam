@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string("judul");
             $table->string("caption");
             $table->string("file");
+            $table->string("status");
             $table->timestamps();
         });
     }

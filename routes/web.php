@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\authController;
-use App\Http\Controllers\beritaController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\DashboardController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,15 +17,18 @@ use App\Http\Controllers\beritaController;
 */
 
 route::group(['middleware' => ['auth']], function () {
-    Route::get('/', [authController::class, 'welcome']);
-    Route::get('/berita/add', [beritaController::class, 'beritaAdd']);
-    Route::get('/berita/read', [beritaController::class, 'beritaRead']);
-    Route::get('/berita/delete/{id}', [beritaController::class, 'beritaDelete']);
-    Route::get('/berita/edit/{id}', [beritaController::class, 'beritaEdit']);
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/berita/detail', [BeritaController::class, 'detail'])->name('berita.detail');
+    Route::resource('/berita', BeritaController::class);
+    // Route::get('/', [authController::class, 'welcome']);
+    // Route::get('/berita/add', [beritaController::class, 'beritaAdd']);
+    // Route::get('/berita/read', [beritaController::class, 'beritaRead']);
+    // Route::get('/berita/delete/{id}', [beritaController::class, 'beritaDelete']);
+    // Route::get('/berita/edit/{id}', [beritaController::class, 'beritaEdit']);
     Route::get('/confirm/admin/{id}', [beritaController::class, 'confirmAdmin']);
     Route::post('/confirm/admin/{id}', [beritaController::class, 'confirmAdminPost']);
     Route::post('/berita/edit/{id}', [beritaController::class, 'beritaEditPost']);
-    Route::post('/berita/add', [beritaController::class, 'beritaPost']);
+    // Route::post('/berita/add', [beritaController::class, 'beritaPost']);
 });
 
 
@@ -36,3 +41,4 @@ route::group(['middleware' => ['guest']], function () {
     Route::get('/register', [authController::class, 'register'])->name('register');
 
 });
+

@@ -8,11 +8,37 @@ use Illuminate\Http\Request;
 
 class beritaController extends Controller
 {
-    public function beritaAdd()
+
+   public function index()
     {
-        return view('berita/create_berita');
+        $berita=berita::latest()->paginate(4)->withQueryString();
+        return view("pages/berita/index",compact("berita"));
+
+
     }
-    public function beritaPost(Request $request)
+
+
+
+
+    public function create()
+    {
+        return view('pages/berita/create');
+    }
+
+
+
+
+
+     public function detail()
+    {
+        return view('pages/berita/detail');
+    }
+
+
+
+
+
+    public function store(Request $request)
     {
         $random=Str::random(20);
         $berita=new berita;
@@ -23,16 +49,14 @@ class beritaController extends Controller
         $berita->judul=$request->judul;
         $berita->caption=$request->caption;
         $berita->file=$filename;
-        $berita->status="draf";
         $berita->save();
-        return redirect('/');
+        return redirect('pages/berita/index');
     }
-    public function beritaRead()
-    {
-        $berita=berita::latest()->paginate(4)->withQueryString();
-        return view("berita/read_berita",compact("berita"));
-    }
-    public function beritaDelete($id)
+
+
+
+
+    public function destroy($id)
     {
         $berita=berita::findOrFail($id);
         if ($berita != "") {
@@ -41,12 +65,21 @@ class beritaController extends Controller
         $berita->delete();
         return redirect()->back();
     }
-    public function beritaEdit($id)
+
+
+
+
+    public function edit($id)
     {
         $berita=berita::findOrFail($id);
-        return view('berita/edit_berita',compact('berita'));
+        return view('pages/berita/edit',compact('berita'));
     }
-    public function beritaEditPost($id,Request $request)
+
+
+
+
+
+    public function update($id,Request $request)
     {
         $berita=berita::findOrFail($id);
         $random=Str::random(20);
@@ -60,18 +93,22 @@ class beritaController extends Controller
             $file->move(public_path('file_berita'), $berita->file);
         }
         $berita->update();
-        return redirect('/berita/read');
+        return redirect('pages/berita/index');
     }
+
+
     public function confirmAdmin($id)
     {
         $berita=berita::findOrFail($id);
         return view('confirm/c_admin',compact('berita'));
     }
+
+
     public function confirmAdminPost(Request $request, $id)
     {
         $berita=berita::findOrFail($id);
         $berita->status=$request->confirm;
         $berita->update();
-        return redirect('/berita/read');
+        return redirect('pages/berita/index');
     }
 }

@@ -8,36 +8,38 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="row mx-3">
-                            <div class="col-lg-8 col-sm-6">
-                                <h4 class="box-title">List Berita</h4>
+                            <div class="col-lg-4 col-sm-12">
+                                <h3 class="font-weight-bold">List Berita</h3>
                             </div>
-                            <div class="col-lg-3 col-sm-6 ml-auto">
-                                <h4 class="box-title">Status</h4>
-                                <div class="dropdown show">
+                            <div class="col-lg-4 col-sm-12">
+                                <div class="dropdown">
                                     <a class="btn dropdown-status-berita dropdown-toggle" href="#" role="button"
                                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
-                                        Draft
+                                        STATUS
                                     </a>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="/berita?search=draft">Draft</a>
-                                        <a class="dropdown-item" href="/berita?search=revisi">Revisi</a>
-                                        <a class="dropdown-item" href="/berita?search=terima">Terima</a>
+                                        <a class="dropdown-item" href="/berita">ALL</a>
+                                        <a class="dropdown-item" href="/berita?search=draft">DRAFT</a>
+                                        <a class="dropdown-item" href="/berita?search=revisi">REVISI</a>
+                                        <a class="dropdown-item" href="/berita?search=terima">TERIMA</a>
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-4 col-sm-12">
                             <form action="{{ route('berita.index') }}">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search...." name="search"
+                                    <input type="text" class="form-control" placeholder="Cari" name="search"
                                         value="{{ request('search') }}">
-                                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                                    <button class="btn btn-search" type="submit"><i class="fa fa-search"></i></button>
                                 </div>
                             </form>
+                            </div>
                         </div>
                     </div>
                     <div class="card-body--">
-                        <div class="table-stats order-table ov-h">
+                        <div class="table-stats order-table  ov-h">
                             <table class="table">
                                 <thead>
 
@@ -57,8 +59,8 @@
                                                 <td>{{ $no + $berita->firstItem() }}</td>
                                                 <td>{{ $brt->judul }}</td>
                                                 <td>{{ $brt->caption }}</td>
-                                                <td><a class="btn btn-primary"
-                                                        href="{{ asset('/file_berita/' . $brt->file) }}">berita</a></td>
+                                                <td><a class="link-berita"  target="_blank"
+                                                        href="{{ asset('/file_berita/' . $brt->file) }}">{{$brt->file}}</a></td>
                                                 <td>{{ $brt->status }}</td>
                                                 <td>
                                                     {{-- <td><a href="/berita/edit/{{$brt->id}}">edit</a> | <a href="/berita/delete/{{$brt->id}}" onclick="return confirm('Yakin ingin hapus ? ')">delete</a> |
@@ -70,13 +72,6 @@
                                                         class="btn btn-primary btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-                                                    <form action="#" method="post" class="d-inline">
-                                                        @csrf
-                                                        @method('delete')
-                                                        <button class="btn btn-danger btn-sm">
-                                                            <i class="fa fa-trash"></i>
-                                                        </button>
-                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach

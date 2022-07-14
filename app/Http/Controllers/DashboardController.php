@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\berita;
 
 class DashboardController extends Controller
 {
-    public function index(){
-        return view('pages/dashboard');
+    public function index()
+    {
+        $berita = berita::all();
+        return view('pages/dashboard', compact('berita'));
     }
 }

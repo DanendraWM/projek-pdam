@@ -15,7 +15,7 @@
                         <a href="{{ route('berita.create') }}"> <i class="menu-icon fa fa-plus"></i>Tambah Berita</a>
                     </li>
 
-                    <li class="menu-title">nvoice</li><!-- /.menu-title -->
+                    <li class="menu-title">invoice</li><!-- /.menu-title -->
                     <li class="">
                         <a href="#"> <i class="menu-icon fa fa-list"></i>List Invoice</a>
                     </li>

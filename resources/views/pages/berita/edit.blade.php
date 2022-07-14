@@ -1,14 +1,14 @@
-@extends('layouts.dafault')
+@extends('layouts.default')
 
 
 @section('content')
     <div class="card">
         <div class="card-header">
             <strong>
-                Ubah Barang
+                Edit Berita
             </strong>
             <div class="card-body card-block">
-                <form action="{{route('berita.update',$berita->id)}}" method="POST">
+                <form action="{{route('berita.update',$berita->id)}}" method="POST" enctype="multipart/form-data" >
                     @method('PUT')
                     @csrf
                    <div class="form-group">
@@ -24,7 +24,7 @@
                     </div>
                     <div class="form-group">
                         <label for="file" class="form-control-label">Upload File Berita</label>
-                        <input type="file" name="file" value="{{old('file')}}" class="form-control @error('file') is-invalid @enderror "/>
+                        <input type="file" name="file" value="{{$berita->file}}" class="form-control @error('file') is-invalid @enderror "/>
                         @error('file') <div class="text-muted">{{$massage}}</div> @enderror
                     </div>
                     <div class="form-group">

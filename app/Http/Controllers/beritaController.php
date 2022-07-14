@@ -36,7 +36,7 @@ class beritaController extends Controller
         $berita->judul = $request->judul;
         $berita->caption = $request->caption;
         $berita->file = $filename;
-        $berita->status = "draft";
+        $berita->status = "DRAFT";
         $berita->save();
         return redirect('/berita');
     }
@@ -71,7 +71,7 @@ class beritaController extends Controller
             $file->move(public_path('file_berita'), $berita->file);
         }
         $berita->update();
-        return redirect('pages/berita/index');
+        return redirect()->route('berita.index');
     }
 
     public function confirmAdmin($id)
@@ -89,5 +89,18 @@ class beritaController extends Controller
         $berita->status = $request->confirm;
         $berita->update($validate);
         return redirect('/berita');
+    }
+
+     public function setStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:DRAFT,REVISI,TERIMA'
+        ]);
+        $berita = berita::findOrFail($id);
+        $berita->status = $request->status;
+
+        $berita->save();
+
+        return redirect()->route('berita.index');
     }
 }

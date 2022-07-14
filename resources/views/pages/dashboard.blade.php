@@ -6,7 +6,8 @@
         <!-- Widgets  -->
         <div class="row">
             <div class="col-lg-4 col-md-6">
-                <div class="card">
+                <a  href="{{route('berita.index')}}">
+                    <div class="card card-dashboard">
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-1">
@@ -21,10 +22,12 @@
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
 
             <div class="col-lg-4 col-md-6">
-                <div class="card">
+                <a href="#">
+                    <div class="card card-dashboard">
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-4">
@@ -39,10 +42,12 @@
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
 
             <div class="col-lg-4 col-md-6">
-                <div class="card">
+                <a href="#">
+                    <div class="card card-dashboard">
                     <div class="card-body">
                         <div class="stat-widget-five">
                             <div class="stat-icon dib flat-color-2">
@@ -57,6 +62,7 @@
                         </div>
                     </div>
                 </div>
+                </a>
             </div>
         </div>
         <!-- /Widgets -->

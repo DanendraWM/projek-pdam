@@ -3424,7 +3424,66 @@ footer.site-footer .footer-inner a {
 
 .dropdown-status-berita {
     border: 1px solid black;
+    min-width: 200px;
 }
 
+.dropdown .dropdown-item {
+    min-width: 200px;
+}
 
-/*# sourceMappingURL=style.css.map */
+.head-detail {
+    font-size: 26px;
+    font-weight: 900;
+}
+
+.field-berita {
+    font-weight: 600;
+    font-size: 14px;
+    color: #607d8b;
+}
+
+.link-berita {
+    color: #0099d4;
+    text-decoration: underline;
+}
+
+.card-detail-berita h6 {
+    font-size: 18px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.modal-title-hapus {
+    min-height: 100px;
+}
+
+.modal-title-hapus h4 {
+    font-size: 22px;
+}
+
+.modal-title-terima {
+    min-height: 100px;
+}
+
+.modal-title-terima h4 {
+    font-size: 22px;
+}
+
+.card-dashboard:hover {
+    background-color: #00aced;
+}
+
+.card-dashboard:hover .stat-text,
+.card-dashboard:hover .stat-icon,
+.card-dashboard:hover .stat-heading {
+    color: white;
+}
+
+.table-stats tbody tr:hover {
+    background-color: gainsboro;
+}
+
+.btn-search {
+    background-color: #0099d4;
+    color: white;
+}

@@ -13,7 +13,8 @@ class userController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages/user/index');
+
     }
 
     /**
@@ -23,7 +24,8 @@ class userController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages/user/create');
+
     }
 
     /**
@@ -54,9 +56,10 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit()
     {
-        //
+        return view('pages/user/edit');
+
     }
 
     /**
@@ -80,5 +83,12 @@ class userController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+        public function detailUser()
+    {
+
+        return view('pages/user/detail');
+
     }
 }

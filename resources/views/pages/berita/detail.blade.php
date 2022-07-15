@@ -55,7 +55,7 @@
                                     <br>{{ $berita->status }}</h6>
 
                                     @if ($berita->status === 'REVISI')
-                                        <p class="mb-5"><span class="field-berita text-danger" >Alasan Revisi* </span> <br> jangan bikin berita hoax </p>
+                                        <p class="mb-5"><span class="field-berita text-danger" >Alasan Revisi* </span> <br> {{$berita->alasan}} </p>
                                     @endif
 
                                 </div>
@@ -90,21 +90,20 @@
                                                     <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title" id="exampleModalLabel">Masukkan Alasan Revisi</h5>
-
-                                                        </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="">
+                                                        <form action="/berita/revisi/{{$berita->id}}" method="post">
+                                                            @csrf
                                                         <div class="form-group">
-                                                     <input type="text" name="" value="" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  autofocus required>
+                                                            <input type="text" name="alasan" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  autofocus required>
                                                         </div>
-                                                        </form>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                        <a href="{{route('berita.status', $berita->id)}}?status=REVISI" class=" btn btn-warning">
-                                                    <i class="fa fa-times"></i> REVISI
-                                                     </a>
+                                                        <button class=" btn btn-warning">
+                                                            <i class="fa fa-times"></i> REVISI
+                                                        </button>
+                                                    </form>
                                                     </div>
                                                     </div>
                                                 </div>

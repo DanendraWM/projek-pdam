@@ -23,6 +23,7 @@ route::group(['middleware' => ['auth']], function () {
     Route::get('/berita/detail/{id}', [beritaController::class, 'confirmAdmin']);
     Route::post('/berita/detail/{id}', [beritaController::class, 'confirmAdminPost']);
     Route::get('berita/{id}/set-status', [beritaController::class,'setStatus'])->name('berita.status');
+    Route::post('/berita/revisi/{id}', [beritaController::class, 'revisiPost']);
 });
 
 Route::post('/login', [authController::class, 'authLogin']);

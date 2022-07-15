@@ -27,6 +27,11 @@ class beritaController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'file'=>['mimes:pdf,word', 'max:1000']
+        ],[
+            'file.mimes'=>'file berita harus: word,pdf'
+        ]);
         $random = Str::random(20);
         $berita = new berita;
         $file = $request->file;
@@ -102,5 +107,13 @@ class beritaController extends Controller
         $berita->save();
 
         return redirect()->route('berita.index');
+    }
+    public function revisiPost(Request $request, $id)
+    {
+        $berita = berita::findOrFail($id);
+        $berita->status="REVISI";
+        $berita->alasan=$request->alasan;
+        $berita->update();
+        return redirect('/berita');
     }
 }

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("caption");
             $table->string("file");
             $table->string("status");
+            $table->string("alasan")->nullable();
             $table->timestamps();
         });
     }

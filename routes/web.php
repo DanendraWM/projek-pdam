@@ -3,6 +3,8 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\beritaController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\userController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,6 +26,12 @@ route::group(['middleware' => ['auth']], function () {
     Route::post('/berita/detail/{id}', [beritaController::class, 'confirmAdminPost']);
     Route::get('berita/{id}/set-status', [beritaController::class,'setStatus'])->name('berita.status');
     Route::post('/berita/revisi/{id}', [beritaController::class, 'revisiPost']);
+
+
+    Route::get('/user/detail', [userController::class, 'detailUser'])->name('user.detail');
+    Route::resource('/user', userController::class);
+
+
 });
 
 Route::post('/login', [authController::class, 'authLogin']);

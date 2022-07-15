@@ -24,12 +24,12 @@
                     <li class="">
                         <a href="#"> <i class="menu-icon fa fa-list"></i>List Nota</a>
                     </li>
-                                        <li class="">
+                    <li class="">
                         <a href="#"> <i class="menu-icon fa fa-plus"></i>Tambah Nota</a>
                     </li>
                     <li class="menu-title">User</li><!-- /.menu-title -->
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-list"></i>List User</a>
+                        <a href="{{ route('user.index') }}"> <i class="menu-icon fa fa-list"></i>List User</a>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </nav>

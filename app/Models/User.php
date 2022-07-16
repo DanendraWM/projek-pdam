@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -22,7 +21,14 @@ class User extends Authenticatable
         'email',
         'password',
     ];
-
+    public function scopeFilter($query, array $filters)
+    {
+        if (isset($filters['search']) ? $filters['search'] : false) {
+            return $query->where('name', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('level', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('email', 'like', '%' . $filters['search'] . '%');
+        }
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

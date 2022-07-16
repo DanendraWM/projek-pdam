@@ -5,7 +5,7 @@
     <div class="orders">
         <div class="row">
             <div class="col-12">
-                <a href="{{route('user.create')}}" class="btn btn-primary mb-3">Buat User</a>
+                <a href="{{ route('user.create') }}" class="btn btn-primary mb-3">Buat User</a>
                 <div class="card">
                     <div class="card-body">
                         <div class="row mx-3">
@@ -14,30 +14,30 @@
                             </div>
                             <div class="col-lg-4 col-sm-12">
                                 <div class="dropdown">
-                                    <a class="btn dropdown-status-berita dropdown-toggle" href="#" role="button"
+                                    <a class="btn dropdown-status-user dropdown-toggle" href="#" role="button"
                                         id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                         aria-expanded="false">
                                         LEVEL ADMIN
                                     </a>
 
                                     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" href="/berita">KASUBID</a>
-                                        <a class="dropdown-item" href="/berita?search=draft">KABID</a>
-                                        <a class="dropdown-item" href="/berita?search=revisi">KASAT</a>
-                                        <a class="dropdown-item" href="/berita?search=terima">DIREKTUR UMUM</a>
-                                        <a class="dropdown-item" href="/berita?search=terima">DIREKTUR UTAMA</a>
-                                        <a class="dropdown-item" href="/berita?search=terima">KEUANGAN</a>
+                                        <a class="dropdown-item" href="/user?search=kasubid">KASUBID</a>
+                                        <a class="dropdown-item" href="/user?search=kabid">KABID</a>
+                                        <a class="dropdown-item" href="/user?search=kasat">KASAT</a>
+                                        <a class="dropdown-item" href="/user?search=direktur+umum">DIREKTUR UMUM</a>
+                                        <a class="dropdown-item" href="/user?search=direktur+utama">DIREKTUR UTAMA</a>
+                                        <a class="dropdown-item" href="/user?search=keuangan">KEUANGAN</a>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
-                            <form action="#">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari" name="search"
-                                        value="{{ request('search') }}">
-                                    <button class="btn btn-search" type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-                            </form>
+                                <form action="{{ route('user.index') }}">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Cari" name="search"
+                                            value="{{ request('search') }}">
+                                        <button class="btn btn-search" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -55,34 +55,29 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {{-- @if ($berita->count())
-                                        @foreach ($berita as $no => $brt) --}}
+                                    @if ($user->count())
+                                        @foreach ($user as $no => $usr)
                                             <tr>
-                                                <td>1</td>
-                                                <td>danendra</td>
-                                                <td>danendra@gmail.com</td>
-                                                <td>super admin</td>
+                                                <td>{{ $no + $user->firstItem() }}</td>
+                                                <td>{{ $usr->name }}</td>
+                                                <td>{{ $usr->email }}</td>
+                                                <td>{{ $usr->level }}</td>
                                                 <td>
-                                                    {{-- <td><a href="/berita/edit/{{$brt->id}}">edit</a> | <a href="/berita/delete/{{$brt->id}}" onclick="return confirm('Yakin ingin hapus ? ')">delete</a> |
-                                                @if (auth()->user()->level === 'admin')
-                                                    <a href="/confirm/admin/{{$brt->id}}">confirm</a>
-                                                @endif
-                                            </td> --}}
-                                                    <a href="{{route('user.detail')}}"
+                                                    <a href="{{ route('user.show', $usr->id) }}"
                                                         class="btn btn-primary btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                 </td>
                                             </tr>
-                                        {{-- @endforeach
-                                    @else --}}
+                                        @endforeach
+                                    @else
                                         <tr>
                                             <td colspan="6" class="text-center p-5">
                                                 Data tidak tersedia
                                                 <a href="/user" class="text-info"> Lihat semua data</a>
                                             </td>
                                         </tr>
-                                    {{-- @endif --}}
+                                    @endif
                                 </tbody>
                             </table>
                         </div>

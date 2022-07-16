@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class userController extends Controller
@@ -13,8 +14,8 @@ class userController extends Controller
      */
     public function index()
     {
-        return view('pages/user/index');
-
+        $user = User::latest()->filter(request(['search']))->paginate(10)->withQueryString();
+        return view('pages/user/index', compact('user'));
     }
 
     /**
@@ -36,7 +37,13 @@ class userController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $user = new User;
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->level = $request->role;
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect('/user');
     }
 
     /**
@@ -47,7 +54,8 @@ class userController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('pages/user/detail', compact('user'));
     }
 
     /**
@@ -56,9 +64,10 @@ class userController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('pages/user/edit');
+        $user = User::findOrFail($id);
+        return view('pages/user/edit', compact('user'));
 
     }
 
@@ -71,7 +80,21 @@ class userController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'password' => ['nullable'],
+        ]);
+        $user = User::findOrFail($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->level = $request->role;
+        if ($request->password != null) {
+            $user->password = $request->password;
+        } else {
+            $user->password = $user->password;
+        }
+        $user->update();
+        return redirect('/user');
+        // return $user;
     }
 
     /**
@@ -85,10 +108,8 @@ class userController extends Controller
         //
     }
 
-        public function detailUser()
+    public function detailUser($id)
     {
-
-        return view('pages/user/detail');
 
     }
 }

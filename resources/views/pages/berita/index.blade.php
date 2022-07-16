@@ -28,13 +28,13 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-12">
-                            <form action="{{ route('berita.index') }}">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Cari" name="search"
-                                        value="{{ request('search') }}">
-                                    <button class="btn btn-search" type="submit"><i class="fa fa-search"></i></button>
-                                </div>
-                            </form>
+                                <form action="{{ route('berita.index') }}">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Cari" name="search"
+                                            value="{{ request('search') }}">
+                                        <button class="btn btn-search" type="submit"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -59,8 +59,9 @@
                                                 <td>{{ $no + $berita->firstItem() }}</td>
                                                 <td>{{ $brt->judul }}</td>
                                                 <td>{{ $brt->caption }}</td>
-                                                <td><a class="link-berita"  target="_blank"
-                                                        href="{{ asset('/file_berita/' . $brt->file) }}">{{$brt->file}}</a></td>
+                                                <td><a class="link-berita" target="_blank"
+                                                        href="{{ asset('/file_berita/' . $brt->file) }}">{{ $brt->file }}</a>
+                                                </td>
                                                 <td>{{ $brt->status }}</td>
                                                 <td>
                                                     {{-- <td><a href="/berita/edit/{{$brt->id}}">edit</a> | <a href="/berita/delete/{{$brt->id}}" onclick="return confirm('Yakin ingin hapus ? ')">delete</a> |
@@ -68,7 +69,7 @@
                                                     <a href="/confirm/admin/{{$brt->id}}">confirm</a>
                                                 @endif
                                             </td> --}}
-                                                    <a href="/berita/detail/{{ $brt->id }}"
+                                                    <a href="{{ route('user.detail', $srt->id) }}"
                                                         class="btn btn-primary btn-sm">
                                                         <i class="fa fa-eye"></i>
                                                     </a>

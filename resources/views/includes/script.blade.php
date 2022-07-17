@@ -26,28 +26,6 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/32.0.0/classic/ckeditor.js"></script>
 
      <body>
-                <script>
-                        ClassicEditor
-                                .create( document.querySelector( '.ckeditor' ) )
-                                .then( editor => {
-                                        console.log( editor );
-                                } )
-                                .catch( error => {
-                                        console.error( error );
-                                } );
-                </script>
-
-
-    <script>
-        jQuery(document).ready(function($){
-            $('#mymodal').on('show.bs.modal', function(e){
-                var button = $(e.relatedTarget);
-                var modal = $(this);
-                modal.find('.modal-body').load(button.data("remote"));
-                modal.find('.modal-title').html(button.data("title"));
-            });
-        });
-    </script>
 
     <div class="modal" id="mymodal" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">

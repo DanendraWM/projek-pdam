@@ -2006,6 +2006,60 @@ header .form-inline .search-form.close {
     font-size: 12px;
 }
 
+#flotPie2 {
+    height: 90px;
+}
+
+#flotPie2 .pieLabel {
+    display: none;
+}
+
+#flotPie2 .legend tr {
+    padding-bottom: 5px;
+}
+
+#flotPie2 .legendColorBox {
+    float: left;
+    margin: 2px 5px 0 0;
+}
+
+#flotPie2 .legendColorBox>div {
+    border: none !important;
+}
+
+#flotPie2 .legendLabel {
+    color: #868e96;
+    font-family: "Open Sans";
+    font-size: 12px;
+}
+
+#flotPie3 {
+    height: 90px;
+}
+
+#flotPie3 .pieLabel {
+    display: none;
+}
+
+#flotPie3 .legend tr {
+    padding-bottom: 5px;
+}
+
+#flotPie3 .legendColorBox {
+    float: left;
+    margin: 2px 5px 0 0;
+}
+
+#flotPie3 .legendColorBox>div {
+    border: none !important;
+}
+
+#flotPie3 .legendLabel {
+    color: #868e96;
+    font-family: "Open Sans";
+    font-size: 12px;
+}
+
 
 /* Stats Table */
 

@@ -17,15 +17,16 @@
 
                     <li class="menu-title">invoice</li><!-- /.menu-title -->
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-list"></i>List Invoice</a>
+                        <a href="{{ route('invoice.index') }}"> <i class="menu-icon fa fa-list"></i>List Invoice</a>
                     </li>
 
                     <li class="menu-title">Nota</li><!-- /.menu-title -->
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-list"></i>List Nota</a>
+                        <a href="{{ route('nota.index') }}"> <i class="menu-icon fa fa-list"></i>List Nota</a>
                     </li>
+                     <li class="menu-title">Voucer</li><!-- /.menu-title -->
                     <li class="">
-                        <a href="#"> <i class="menu-icon fa fa-plus"></i>Tambah Nota</a>
+                        <a href="{{ route('voucer.index') }}"> <i class="menu-icon fa fa-list"></i>List Voucer</a>
                     </li>
                     <li class="menu-title">User</li><!-- /.menu-title -->
                     <li class="">

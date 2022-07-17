@@ -34,6 +34,26 @@
             top: 20px!important;
             right: -10px!important;
         }
+         #flotPie2  {
+            height: 150px;
+        }
+        #flotPie2 td {
+            padding:3px;
+        }
+        #flotPie2 table {
+            top: 20px!important;
+            right: -10px!important;
+        }
+        #flotPie3  {
+            height: 150px;
+        }
+        #flotPie3 td {
+            padding:3px;
+        }
+        #flotPie3 table {
+            top: 20px!important;
+            right: -10px!important;
+        }
         .chart-container {
             display: table;
             min-width: 270px ;

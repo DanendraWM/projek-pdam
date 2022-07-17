@@ -26,8 +26,10 @@ class beritaRequest extends FormRequest
         return [
             'id'=>'required|integer|exists:beritas,id',
             'judul'=>'required',
-            'caption'=>'required',
+            'deskripsi'=>'required',
+            'nama_media'=>'required',
             'file'=>'required|csv,txt,xlx,xls,pdf'
+
         ];
     }
 }

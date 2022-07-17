@@ -49,7 +49,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <button class="btn btn-primary btn-block" type="submit">Tambah Berita</button>
+                        <button class="btn btn-primary btn-block" type="submit">BUAT USER</button>
                     </div>
                 </form>
             </div>

@@ -14,7 +14,7 @@ class berita extends Model
     {
         if (isset($filters['search']) ? $filters['search'] : false) {
             return $query->where('judul', 'like', '%' . $filters['search'] . '%')
-                ->orWhere('caption', 'like', '%' . $filters['search'] . '%')
+                ->orWhere('deskripsi', 'like', '%' . $filters['search'] . '%')
                 ->orWhere('status', 'like', '%' . $filters['search'] . '%');
         }
     }

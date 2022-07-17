@@ -20,10 +20,6 @@ class beritaController extends Controller
         return view('pages/berita/create');
     }
 
-    public function detail()
-    {
-        return view('pages/berita/detail');
-    }
 
     public function store(Request $request)
     {
@@ -39,8 +35,9 @@ class beritaController extends Controller
         $filename = $random . '.' . $file->extension();
         $file->move(public_path('file_berita'), $filename);
         $berita->judul = $request->judul;
-        $berita->caption = $request->caption;
+        $berita->deskripsi = $request->deskripsi;
         $berita->file = $filename;
+        $berita->nama_media = $request->nama_media;
         $berita->status = "DRAFT";
         $berita->save();
         return redirect('/berita');
@@ -68,7 +65,8 @@ class beritaController extends Controller
         $random = Str::random(20);
         // $slug = Str::slug($request->judul);
         $berita->judul = $request->judul;
-        $berita->caption = $request->caption;
+        $berita->deskripsi = $request->deskripsi;
+        $berita->nama_media = $request->nama_media;
         if ($request->file !== null) {
             unlink(public_path('file_berita') . '\\' . $berita->file);
             $file = $request->file;

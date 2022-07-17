@@ -4,6 +4,11 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\beritaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\userController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\NotaController;
+use App\Http\Controllers\VoucerController;
+
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,16 +24,22 @@ use Illuminate\Support\Facades\Route;
 
 route::group(['middleware' => ['auth']], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/berita/detail', [beritaController::class, 'detail'])->name('berita.detail');
     Route::resource('/berita', beritaController::class);
     Route::get('/berita/detail/{id}', [beritaController::class, 'confirmAdmin']);
     Route::post('/berita/detail/{id}', [beritaController::class, 'confirmAdminPost']);
     Route::get('berita/{id}/set-status', [beritaController::class, 'setStatus'])->name('berita.status');
     Route::post('/berita/revisi/{id}', [beritaController::class, 'revisiPost']);
 
+
+    Route::resource('/invoice', InvoiceController::class);
+    Route::resource('/nota', NotaController::class);
+    Route::resource('/voucer', VoucerController::class);
+
+
+
+
 });
 route::group(['middleware' => ['auth', 'cekLevel:admin']], function () {
-    // Route::get('/user/detail/{id}', [userController::class, 'detailUser'])->name('user.detail');
     Route::resource('/user', userController::class);
 });
 

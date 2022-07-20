@@ -29,14 +29,11 @@ route::group(['middleware' => ['auth']], function () {
     Route::post('/berita/detail/{id}', [beritaController::class, 'confirmAdminPost']);
     Route::get('berita/{id}/set-status', [beritaController::class, 'setStatus'])->name('berita.status');
     Route::post('/berita/revisi/{id}', [beritaController::class, 'revisiPost']);
-
-
     Route::resource('/invoice', InvoiceController::class);
+    Route::get('/invoice/create/{id}', [InvoiceController::class, 'createInv']);
+    Route::get('/invoice/{id}/set-status', [invoiceController::class, 'setStatus'])->name('invoice.status');
     Route::resource('/nota', NotaController::class);
     Route::resource('/voucer', VoucerController::class);
-
-
-
 
 });
 route::group(['middleware' => ['auth', 'cekLevel:admin']], function () {

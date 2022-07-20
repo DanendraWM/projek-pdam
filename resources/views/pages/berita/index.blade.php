@@ -77,7 +77,7 @@
                                         @endforeach
                                     @else
                                         <tr>
-                                            <td colspan="6" class="text-center p-5">
+                                            <td colspan="8" class="text-center p-5">
                                                 Data tidak tersedia
                                                 <a href="/berita" class="text-info"> Lihat semua data</a>
                                             </td>

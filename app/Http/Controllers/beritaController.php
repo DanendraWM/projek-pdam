@@ -24,7 +24,7 @@ class beritaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file'=>['mimes:pdf,word', 'max:1000']
+            'file'=>['mimes:pdf,word,jpg,jpeg,png', 'max:1000']
         ],[
             'file.mimes'=>'file berita harus: word,pdf'
         ]);
@@ -73,6 +73,7 @@ class beritaController extends Controller
             $berita->file = $random . '.' . $file->extension();
             $file->move(public_path('file_berita'), $berita->file);
         }
+        $berita->status = "DRAFT";
         $berita->update();
         return redirect()->route('berita.index');
     }

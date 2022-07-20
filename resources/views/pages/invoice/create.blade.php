@@ -9,8 +9,9 @@
                 Tambah Invoice
             </strong>
             <div class="card-body card-block">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('invoice.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="text" name="id_berita" value="{{$berita->id}}" hidden>
                     <div class="form-group">
                         <label for="untuk_keperluan" class="form-control-label">Keperluan</label>
                            <input type="text" name = "untuk_keperluan" class="form-control @error('untuk_keperluan') is-invalid @enderror" autofocus required>
@@ -54,55 +55,55 @@
                     <div class="form-group">
                         <label for="medsos" class="form-control-label">Media Sosial</label>
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Facebook" id="Facebook">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="Facebook" id="Facebook">
                         <label class="form-check-label" for="Facebook">
                             Facebook
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Twitter" id="Twitter">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="Twitter" id="Twitter">
                         <label class="form-check-label" for="Twitter">
                             Twitter
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Instagram" id="Instagram">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="Instagram" id="Instagram">
                         <label class="form-check-label" for="Instagram">
                             Instagram
                         </label>
                         </div>
                          <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Youtube" id="Youtube">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="Youtube" id="Youtube">
                         <label class="form-check-label" for="Youtube">
                             Youtube
                         </label>
                         </div>
                          <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Telegram" id="Telegram">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="Telegram" id="Telegram">
                         <label class="form-check-label" for="Telegram">
                             Telegram
                         </label>
                         </div>
                          <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="online" id="online">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="online" id="online">
                         <label class="form-check-label" for="online">
                             online
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Media_analytic" id="Media_analytic">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="Media_analytic" id="Media_analytic">
                         <label class="form-check-label" for="Media_analytic">
                             Media analytic
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="Cetak" id="Cetak">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="Cetak" id="Cetak">
                         <label class="form-check-label" for="Cetak">
                             Cetak
                         </label>
                         </div>
                         <div class="form-check">
-                        <input class="form-check-input" type="checkbox" value="WhatsApp_group" id="WhatsApp_group">
+                        <input class="form-check-input" name="medsos[]" type="checkbox" value="WhatsApp_group" id="WhatsApp_group">
                         <label class="form-check-label" for="WhatsApp_group">
                             WhatsApp group
                         </label>

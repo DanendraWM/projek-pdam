@@ -23,10 +23,9 @@ return new class extends Migration
             $table->string('uraian');
             $table->string('kode_mata_angsuran');
             $table->string('jumlah_angsuran');
-            $table->string('relasi');
+            $table->string('realisasi');
             $table->integer('sisa_anggaran');
             $table->string('permintaan');
-            $table->string('medsos');
             $table->string('metode_pembayaran');
             $table->string('status');
             $table->softDeletes();            

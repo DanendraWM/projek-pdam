@@ -118,7 +118,7 @@
                                 @endauth
                                 @auth
                                       @if (auth()->user()->level === 'admin' &&  $berita->status === 'TERIMA')
-                                     <a href="{{route('invoice.create')}}" class=" btn btn-danger btn-block mb-2">
+                                     <a href="/invoice/create/{{$berita->id}}" class=" btn btn-danger btn-block mb-2">
                                      <i class="fa fa-pencil mr-2"></i> MAKE INVOICE
                                      </a>
                                       @endif

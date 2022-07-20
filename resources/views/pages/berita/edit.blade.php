@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="nama_media" class="form-control-label">Nama Media </label>
-                        <input type="text" name="nama_media" value="{{old('nama_media')}}" class="form-control @error('nama_media') is-invalid @enderror "  autofocus required/>
+                        <input type="text" name="nama_media" value="{{$berita->nama_media}}" class="form-control @error('nama_media') is-invalid @enderror "  autofocus required/>
                         @error('nama_media') <div class="invalid-feedback">{{$message}}</div> @enderror
                     </div>
                     <div class="form-group">

@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\berita;
-use Illuminate\Http\Request;
 use App\Models\invoice;
 use App\Models\medsos;
-use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
 {
@@ -17,9 +16,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoice=invoice::latest()->filter(request(['search']))->paginate(10)->withQueryString();
-        $medsos=medsos::all();
-        return view('pages/invoice/index',compact('invoice','medsos'));
+        $invoice = invoice::latest()->filter(request(['search']))->paginate(10)->withQueryString();
+        $medsos = medsos::all();
+        return view('pages/invoice/index', compact('invoice', 'medsos'));
 
     }
 
@@ -42,26 +41,26 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        for ($i=0; $i < count($request->medsos); $i++) { 
-            $medsos=new medsos;
-            $medsos->invoice_id=$request->id_berita;
-            $medsos->nama_medsos=$request->medsos[$i];
+        for ($i = 0; $i < count($request->medsos); $i++) {
+            $medsos = new medsos;
+            $medsos->invoice_id = $request->id_berita;
+            $medsos->nama_medsos = $request->medsos[$i];
             $medsos->save();
         }
         $invoice = new invoice;
-        $invoice->berita_id=$request->id_berita;
-        $invoice->kode_invoice=random_int(100000, 999999);
-        $invoice->untuk_keperluan=$request->untuk_keperluan;
-        $invoice->unit_kerja=$request->unit_kerja;
-        $invoice->uraian=$request->uraian;
-        $invoice->kode_mata_angsuran=$request->kode_mata_angsuran;
-        $invoice->jumlah_angsuran=$request->jumlah_angsuran;
-        $invoice->realisasi=$request->realisasi;
-        $invoice->sisa_anggaran=$request->sisa_anggaran;
-        $invoice->permintaan=$request->permintaan;
-        $invoice->total=$request->total;
-        $invoice->metode_pembayaran="uang muka";
-        $invoice->status="DRAFT";
+        $invoice->berita_id = $request->id_berita;
+        $invoice->kode_invoice = random_int(100000, 999999);
+        $invoice->untuk_keperluan = $request->untuk_keperluan;
+        $invoice->unit_kerja = $request->unit_kerja;
+        $invoice->uraian = $request->uraian;
+        $invoice->kode_mata_angsuran = $request->kode_mata_angsuran;
+        $invoice->jumlah_angsuran = $request->jumlah_angsuran;
+        $invoice->realisasi = $request->realisasi;
+        $invoice->sisa_anggaran = $request->sisa_anggaran;
+        $invoice->permintaan = $request->permintaan;
+        $invoice->total = $request->total;
+        $invoice->metode_pembayaran = "uang muka";
+        $invoice->status = "DRAFT";
         $invoice->save();
         return redirect('/invoice');
     }
@@ -74,9 +73,9 @@ class InvoiceController extends Controller
      */
     public function show($id)
     {
-        $invoice=invoice::findOrFail($id);
-        $medsos=medsos::where('invoice_id',$id)->get();
-        return view('pages/invoice/detail',compact('invoice','medsos'));
+        $invoice = invoice::findOrFail($id);
+        $medsos = medsos::where('invoice_id', $id)->get();
+        return view('pages/invoice/detail', compact('invoice', 'medsos'));
 
     }
 
@@ -86,10 +85,16 @@ class InvoiceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit()
+    public function edit($id)
     {
-        return view('pages/invoice/edit');
-
+        $invoice = invoice::findOrFail($id);
+        $medsos = medsos::where('invoice_id', $id)->get();
+        $nama_medsos = array();
+        foreach ($medsos as $mds) {
+            $nm = $mds->nama_medsos;
+            array_push($nama_medsos, $nm);
+        }
+        return view('pages/invoice/edit', compact('invoice', 'nama_medsos'));
     }
 
     /**
@@ -101,7 +106,50 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $medsos = medsos::where('invoice_id', $id)->get();
+        // for ($j = 0; $j < $c_medsos; $j++) {
+        //     for ($i = 0; $i < count($request->medsos); $i++) {
+        //         if ($request->medsos[$i] != $medsos[$j]->nama_medsos) {
+        //             $medsos = new medsos;
+        //             $medsos->invoice_id = $id;
+        //             $medsos->nama_medsos = $request->medsos[$i];
+        //             $medsos->save();
+        //         }
+        //     }
+        // }
+        $req = $request->medsos;
+        $nama_medsos = array();
+        foreach ($medsos as $mds) {
+            $nm = $mds->nama_medsos;
+            array_push($nama_medsos, $nm);
+        }
+        $medsos_new = array_values(array_diff($req, $nama_medsos));
+        $medsos_old = array_values(array_diff($nama_medsos, $req));
+        if (count($medsos_new)) {
+            for ($i = 0; $i < count($medsos_new); $i++) {
+                $medsos = new medsos;
+                $medsos->invoice_id = $id;
+                $medsos->nama_medsos = $medsos_new[$i];
+                $medsos->save();
+            }
+        } else if (count($medsos_old)) {
+            for ($i = 0; $i < count($medsos_old); $i++) {
+                $medsos = medsos::where('nama_medsos', $medsos_old[$i])->delete();
+            }
+        }
+
+        $invoice = invoice::findOrFail($id);
+        $invoice->untuk_keperluan = $request->untuk_keperluan;
+        $invoice->unit_kerja = $request->unit_kerja;
+        $invoice->uraian = $request->uraian;
+        $invoice->kode_mata_angsuran = $request->kode_mata_angsuran;
+        $invoice->jumlah_angsuran = $request->jumlah_angsuran;
+        $invoice->realisasi = $request->realisasi;
+        $invoice->sisa_anggaran = $request->sisa_anggaran;
+        $invoice->permintaan = $request->permintaan;
+        $invoice->total = $request->total;
+        $invoice->update();
+        return redirect('/invoice');
     }
 
     /**
@@ -116,15 +164,15 @@ class InvoiceController extends Controller
     }
     public function createInv($id)
     {
-        $berita=berita::findOrFail($id);
-        return view('pages/invoice/create',compact('berita'));
+        $berita = berita::findOrFail($id);
+        return view('pages/invoice/create', compact('berita'));
 
     }
-    public function setStatus(Request $request,$id)
+    public function setStatus(Request $request, $id)
     {
         $request->validate([
             'status' => 'required|in:SELESAI,NOTA',
-            'metode_pembayaran'=>'required|in:dana kerja,uang muka'
+            'metode_pembayaran' => 'required|in:dana kerja,uang muka',
         ]);
         $invoice = invoice::findOrFail($id);
         $invoice->metode_pembayaran = $request->metode_pembayaran;

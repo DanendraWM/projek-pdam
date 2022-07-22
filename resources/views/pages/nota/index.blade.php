@@ -45,7 +45,7 @@
 
                                     <tr>
                                         <th>#</th>
-                                        <th>nomor voucer</th>
+                                        <th>nomor invoice</th>
                                         <th>nomor nota</th>
                                         <th>Tanggal Nota</th>
                                         <th>perihal</th>
@@ -57,31 +57,76 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @auth
+                                @if ($nota->count())                                    
+                                    @foreach ($nota as $no=>$drm)
                                     <tr>
-                                        <td>1</td>
-                                        <td>2837/ asdjasd</td>
-                                        <td>2837/ asdjasd</td>
-                                        <td>banyak keperluan</td>
-                                        <td>persatuan pdam</td>
-                                        <td>iklan</td>
-                                        <td>12312312</td>
-                                        <td>2222-23-23</td>
-                                        <td>DRAFT</td>
+                                        <td>{{ $no + $nota->firstItem() }}</td>
+                                        <td>{{$drm->invoice->kode_invoice}}/ asdjasd</td>
+                                        <td>{{$drm->kode_nota}}/ asdjasd</td>
+                                        <td>{{$drm->tanggal_nota}}</td>
+                                        <td>{{$drm->perihal}}</td>
+                                        <td>{{$drm->kegiatan}}</td>
+                                        <td>{{$drm->biaya}}</td>
+                                        <td>{{$drm->updated_at}}</td>
+                                        <td>{{$drm->status}}</td>
                                         <td>
-                                            <a href="nota/show"
-                                                class="btn btn-primary btn-sm">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-
+                                            <a href="{{route('nota.show',$drm->id)}}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                {{-- @elseif(auth()->user()->level==="dirut")
+                                     @foreach ($dirut as $no=>$drt)
+                                    <tr>
+                                        <td>{{ $no + $nota->firstItem() }}</td>
+                                        <td>{{$drt->invoice->kode_invoice}}/ asdjasd</td>
+                                        <td>{{$drt->kode_nota}}/ asdjasd</td>
+                                        <td>{{$drt->tanggal_nota}}</td>
+                                        <td>{{$drt->perihal}}</td>
+                                        <td>{{$drt->kegiatan}}</td>
+                                        <td>{{$drt->biaya}}</td>
+                                        <td>{{$drt->updated_at}}</td>
+                                        <td>{{$drt->status}}</td>
+                                        <td>
+                                            <a href="{{route('nota.show',$drt->id)}}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @elseif(auth()->user()->level==="admin")
+                                     @foreach ($nota as $no=>$drt)
+                                    <tr>
+                                        <td>{{ $no + $nota->firstItem() }}</td>
+                                        <td>{{$drt->invoice->kode_invoice}}/ asdjasd</td>
+                                        <td>{{$drt->kode_nota}}/ asdjasd</td>
+                                        <td>{{$drt->tanggal_nota}}</td>
+                                        <td>{{$drt->perihal}}</td>
+                                        <td>{{$drt->kegiatan}}</td>
+                                        <td>{{$drt->biaya}}</td>
+                                        <td>{{$drt->updated_at}}</td>
+                                        <td>{{$drt->status}}</td>
+                                        <td>
+                                            <a href="{{route('nota.show',$drt->id)}}"
+                                            class="btn btn-primary btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach --}}
+                                @else
                                         <tr>
-                                            <td colspan="6" class="text-center p-5">
+                                            <td colspan="10" class="text-center p-5">
                                                 Data tidak tersedia
                                                 <a href="/nota" class="text-info"> Lihat semua data</a>
                                             </td>
                                         </tr>
-
+                                @endif
+                                @endauth
                                 </tbody>
                             </table>
                         </div>

@@ -9,8 +9,9 @@
                 Tambah Voucer
             </strong>
             <div class="card-body card-block">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{route('voucer.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="text" name="id_nota" value="{{$nota->id}}" hidden>
                       <div class="form-group">
                         <label for="file" class="form-control-label">Upload Voucer</label>
                         <input type="file" name="file" value="{{old('file')}}" class="form-control @error('file') is-invalid @enderror "  autofocus required/>

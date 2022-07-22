@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('berita_id');
             $table->foreignId('invoice_id');
             $table->foreignId('nota_id');
+            $table->string("voucher");
             $table->timestamps();
         });
     }

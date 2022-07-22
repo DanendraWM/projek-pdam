@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\invoice;
+use App\Models\nota;
 class NotaController extends Controller
 {
     /**
@@ -13,7 +14,10 @@ class NotaController extends Controller
      */
     public function index()
     {
-        return view('pages/nota/index');
+        $nota=nota::latest()->filter(request(['search']))->paginate(10)->withQueryString();
+        // $dirum=nota::where('status', 'diterima direktur umum')->orWhere('status', 'draft')->get();
+        // $dirut=nota::where('status', 'diterima direktur utama')->orWhere('status', 'diterima direktur umum')->get();
+        return view('pages/nota/index',compact('nota'));
 
     }
 
@@ -36,7 +40,16 @@ class NotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $nota=new nota;
+        $nota->invoice_id=$request->id_invoice;
+        $nota->kode_nota=random_int(100000, 999999);
+        $nota->tanggal_nota=$request->tanggal_nota;
+        $nota->perihal=$request->perihal;
+        $nota->kegiatan=$request->kegiatan;
+        $nota->biaya=$request->biaya;
+        $nota->status="DRAFT";
+        $nota->save();
+        return redirect('/nota');
     }
 
     /**
@@ -45,10 +58,10 @@ class NotaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show($id)
     {
-         return view('pages/nota/detail');
-
+        $nota=nota::findOrFail($id);
+         return view('pages/nota/detail',compact('nota'));
     }
 
     /**
@@ -84,5 +97,24 @@ class NotaController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function createNota($id)
+    {
+        $invoice = invoice::findOrFail($id);
+        $invoice->status="SELESAI";
+        $invoice->update();
+        return view('pages/nota/create', compact('invoice'));
+    }
+    public function setStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:SELESAI,diterima direktur umum,diterima direktur utama',
+        ]);
+        $nota = nota::findOrFail($id);
+        $nota->status = $request->status;
+
+        $nota->update();
+
+        return redirect('/nota');
     }
 }

@@ -9,8 +9,9 @@
                 Tambah Nota
             </strong>
             <div class="card-body card-block">
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="{{route('nota.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="text" name="id_invoice" value="{{$invoice->id}}" hidden>
                     <div class="form-group">
                         <label for="tanggal" class="form-control-label">Tanggal Nota</label>
                            <input type="date" name = "tanggal_nota" class="form-control datepicker @error('tanggal_nota') is-invalid @enderror" autofocus required>

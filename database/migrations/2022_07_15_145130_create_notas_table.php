@@ -16,8 +16,12 @@ return new class extends Migration
         Schema::create('notas', function (Blueprint $table) {
             $table->id();
             $table->foreignId('invoice_id');
-            $table->string('dari');
-            $table->string('lampiran');
+            $table->integer("kode_nota");
+            $table->date('tanggal_nota');
+            $table->string('perihal');
+            $table->string('kegiatan');
+            $table->integer('biaya');
+            $table->string('status');
             $table->softDeletes();
             $table->timestamps();
         });

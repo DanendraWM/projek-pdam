@@ -143,7 +143,7 @@
                                         </span><br>{{ $invoice->updated_at }}</h6>
                                 </div>
                                 @if ($invoice->status == 'NOTA')
-                                    <a href="{{ route('nota.create') }}" class=" btn btn-danger btn-block mb-2">
+                                    <a href="/nota/create/{{$invoice->id}}" class=" btn btn-danger btn-block mb-2">
                                         <i class="fa fa-pencil mr-2"></i> MAKE NOTA
                                     </a>
                                 @endif

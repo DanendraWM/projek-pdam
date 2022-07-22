@@ -132,7 +132,8 @@ class InvoiceController extends Controller
                 $medsos->nama_medsos = $medsos_new[$i];
                 $medsos->save();
             }
-        } else if (count($medsos_old)) {
+        }
+        if (count($medsos_old)) {
             for ($i = 0; $i < count($medsos_old); $i++) {
                 $medsos = medsos::where('nama_medsos', $medsos_old[$i])->delete();
             }
@@ -165,6 +166,8 @@ class InvoiceController extends Controller
     public function createInv($id)
     {
         $berita = berita::findOrFail($id);
+        $berita->status="SELESAI";
+        $berita->update();
         return view('pages/invoice/create', compact('berita'));
 
     }

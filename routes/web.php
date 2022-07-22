@@ -33,7 +33,10 @@ route::group(['middleware' => ['auth']], function () {
     Route::get('/invoice/create/{id}', [InvoiceController::class, 'createInv']);
     Route::get('/invoice/{id}/set-status', [invoiceController::class, 'setStatus'])->name('invoice.status');
     Route::resource('/nota', NotaController::class);
+    Route::get('/nota/{id}/set-status', [NotaController::class, 'setStatus'])->name('nota.status');
+    Route::get('/nota/create/{id}', [NotaController::class, 'createNota']);
     Route::resource('/voucer', VoucerController::class);
+    Route::get('/voucer/create/{id}', [VoucerController::class, 'createVoucer']);
 
 });
 route::group(['middleware' => ['auth', 'cekLevel:admin']], function () {

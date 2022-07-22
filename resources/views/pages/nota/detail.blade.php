@@ -44,19 +44,24 @@
 
                             <div class="card-body">
                                 <div>
-                                    <h6 class="mb-5"><span class="field-berita" >Kode nota  </span> <br> 2342342/pdam</h6>
-                                    <h6  class="mb-5"><span class="field-berita" >Tanggal Nota  </span>   <br>2022-23-23</h6>
-                                    <h6  class="mb-5"><span class="field-berita" >Perihal </span><br>satpol pp</h6>
-                                    <h6  class="mb-5"><span class="field-berita" >Kegiatan </span>   <br>iklan</h6>
-                                    <h6  class="mb-5"><span class="field-berita" >Biaya</span>   <br>123123</h6>
-                                    <h6  class="mb-5"><span class="field-berita" >Status  </span><br>DRAFT</h6>
-                                    <h6  class="mb-5"><span class="field-berita" >Update  </span><br>123123</h6>
+                                    <h6 class="mb-5"><span class="field-berita" >Kode nota  </span> <br> {{$nota->kode_nota}}/pdam</h6>
+                                    <h6 class="mb-5"><span class="field-berita" >Kode invoice  </span> <br> {{$nota->invoice->kode_invoice}}/pdam</h6>
+                                    <h6  class="mb-5"><span class="field-berita" >Tanggal Nota  </span>   <br>{{$nota->tanggal_nota}}</h6>
+                                    <h6  class="mb-5"><span class="field-berita" >Perihal </span><br>{{$nota->perihal}}</h6>
+                                    <h6  class="mb-5"><span class="field-berita" >Kegiatan </span>   <br>{{$nota->kegiatan}}</h6>
+                                    <h6  class="mb-5"><span class="field-berita" >Biaya</span>   <br>{{$nota->biaya}}</h6>
+                                    <h6  class="mb-5"><span class="field-berita" >Status  </span><br>{{$nota->status}}</h6>
+                                    <h6  class="mb-5"><span class="field-berita" >Update  </span><br>{{$nota->updated_at}}</h6>
                                 </div>
                                         <div class="row mb-2">
                                           <div class="col-lg-12">
-                                        <button type="button" class="btn btn-success btn-block mb-2" data-toggle="modal" data-target="#terimaDirumModal">
+                                            @auth
+                                            @if (auth()->user()->level==="dirum" && $nota->status==="DRAFT")
+                                            <button type="button" class="btn btn-success btn-block mb-2" data-toggle="modal" data-target="#terimaDirumModal">
                                             <i class="fa fa-check mr-2"></i>Terima Direktur Umum
                                             </button>
+                                            @endif
+                                            @endauth
                                             <div class="modal fade" id="terimaDirumModal" tabindex="-1" role="dialog" aria-labelledby="terimaDirumModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -65,16 +70,20 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                    <a href="#" class="btn btn-success">
+                                                    <a href="{{ route('nota.status', $nota->id) }}?status=diterima+direktur+umum" class="btn btn-success">
                                                     <i class="fa fa-check"></i> TERIMA
                                                 </a>
                                                 </div>
                                                 </div>
                                             </div>
                                             </div>
-                                             <button type="button" class="btn btn-success btn-block mb-2" data-toggle="modal" data-target="#terimaDirutModal">
-                                            <i class="fa fa-check mr-2"></i>Terima Direktur Utama
+                                            @auth
+                                            @if (auth()->user()->level==="dirut" && $nota->status==="diterima direktur umum")
+                                            <button type="button" class="btn btn-success btn-block mb-2" data-toggle="modal" data-target="#terimaDirutModal">
+                                                <i class="fa fa-check mr-2"></i>Terima Direktur Utama
                                             </button>
+                                            @endif
+                                            @endauth
                                             <div class="modal fade" id="terimaDirutModal" tabindex="-1" role="dialog" aria-labelledby="terimaDirutModalLabel" aria-hidden="true">
                                             <div class="modal-dialog" role="document">
                                                 <div class="modal-content">
@@ -83,17 +92,20 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                                    <a href="#" class=" btn btn-success">
+                                                    <a href="{{ route('nota.status', $nota->id) }}?status=diterima+direktur+utama" class=" btn btn-success">
                                                     <i class="fa fa-check"></i> TERIMA
                                                 </a>
                                                 </div>
                                                 </div>
                                             </div>
                                             </div>
-
-                                                <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#revisiModal">
+                                            @auth
+                                            @if (auth()->user()->level==="dirum" && $nota->status==="DRAFT" || auth()->user()->level==="dirut" && $nota->status==="diterima direktur umum")
+                                            <a href="{{ route('nota.status', $nota->id) }}?status=REVISI" class="btn btn-warning btn-block" data-toggle="modal" data-target="#revisiModal">
                                                 <i class="fa fa-times"></i>REVISI
-                                                </button>
+                                            </a>
+                                            @endif
+                                                                                        @endauth
                                                 <div class="modal fade" id="revisiModal" tabindex="-1" role="dialog" aria-labelledby="revisiModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -101,7 +113,7 @@
                                                         <h5 class="modal-title" id="exampleModalLabel">Masukkan Alasan Revisi</h5>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <form action="#}" method="post">
+                                                        <form action="#" method="post">
                                                             @csrf
                                                         <div class="form-group">
                                                             <input type="text" name="alasan" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"  autofocus required>
@@ -120,10 +132,11 @@
 
                                         </div>
                                         </div>
-
-                                     <a href="{{route('voucer.create')}}" class=" btn btn-danger btn-block mb-2">
-                                     <i class="fa fa-pencil mr-2"></i> MAKE VOUCER
-                                     </a>
+                                    @if ($nota->status==="diterima direktur utama")
+                                    <a href="/voucer/create/{{$nota->id}}" class=" btn btn-danger btn-block mb-2">
+                                        <i class="fa fa-pencil mr-2"></i> MAKE VOUCER
+                                    </a>
+                                    @endif
                                 <div class="row">
                                     <div class="col-lg-12">
                                          <a href="/berita" class="btn btn-secondary btn-block">Kembali</a>

@@ -35,7 +35,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">100</span></div>
+                                    <div class="stat-text"><span class="count">{{$invoice->count()}}</span></div>
                                     <div class="stat-heading">INVOICE</div>
                                 </div>
                             </div>
@@ -55,7 +55,7 @@
                             </div>
                             <div class="stat-content">
                                 <div class="text-left dib">
-                                    <div class="stat-text"><span class="count">100</span></div>
+                                    <div class="stat-text"><span class="count">{{$nota->count()}}</span></div>
                                     <div class="stat-heading">NOTA</div>
                                 </div>
                             </div>

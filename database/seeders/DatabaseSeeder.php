@@ -32,6 +32,18 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('test1234'),
             'level' => 'kasubid',
         ]);
+        user::create([
+            'name' => 'dirut',
+            'email' => 'dirut@gmail.com',
+            'password' => bcrypt('test1234'),
+            'level' => 'dirut',
+        ]);
+        user::create([
+            'name' => 'dirum',
+            'email' => 'dirum@gmail.com',
+            'password' => bcrypt('test1234'),
+            'level' => 'dirum',
+        ]);
 
     }
 }

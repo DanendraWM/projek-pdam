@@ -62,6 +62,7 @@
                                     @endif
 
                                 </div>
+                                @if ($berita->status !== "SELESAI")
                                 @auth
                                     @if (auth()->user()->level === 'admin' &&  $berita->status === 'DRAFT')
                                         <div class="row mb-2">
@@ -123,6 +124,7 @@
                                      </a>
                                       @endif
                                 @endauth
+                                @endif
                                 <div class="row">
                                     <div class="col-lg-12">
                                          <a href="/berita" class="btn btn-secondary btn-block">Kembali</a>
